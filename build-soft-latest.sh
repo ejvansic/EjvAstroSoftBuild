@@ -19,6 +19,14 @@ fi
 [ ! -d "$ROOTDIR" ] && mkdir -p "$ROOTDIR"
 cd "$ROOTDIR"
 
+# delete all previously installed files
+[ -f build-libXISF/install_manifest.txt ] && echo "Deleting libXISF"; cat build-libXISF/install_manifest.txt | sudo xargs rm -f
+[ -f build-indi/install_manifest.txt ] && echo "Deleting INDI"; cat build-indi/install_manifest.txt | sudo xargs rm -f
+[ -f build-indi-lib/install_manifest.txt ] && cat build-indi-lib/install_manifest.txt | sudo xargs rm -f
+[ -f build-indi-3rdparty/install_manifest.txt ] && echo "Deleting INDI 3rdparty"; cat build-indi-3rdparty/install_manifest.txt | sudo xargs rm -f
+[ -f build-stellarsolver/install_manifest.txt ] && echo "Deleting stellarsolver"; cat build-stellarsolver/install_manifest.txt | sudo xargs rm -f
+[ -f build-kstars/install_manifest.txt ] && echo "Deleting KStars"; cat build-kstars/install_manifest.txt | sudo xargs rm -f
+
 [ ! -d "libXISF" ] && { git clone https://gitea.nouspiro.space/nou/libXISF.git || { echo "Failed to clone LibXISF"; exit 1; } }
 cd libXISF
 git pull origin
