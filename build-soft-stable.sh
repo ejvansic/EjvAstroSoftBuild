@@ -37,7 +37,7 @@ cd "$ROOTDIR"
 cd libXISF
 git fetch origin
 git switch -d --discard-changes $LIBXISF_COMMIT
-[ ! -d ../build-libXISF ] && { cmake -B ../build-libXISF ../libXISF -DCMAKE_BUILD_TYPE=Release || { echo "LibXISF configuration failed"; exit 1; } }
+[ ! -d ../build-libXISF ] && { cmake -B ../build-libXISF ../libXISF -DCMAKE_BUILD_TYPE=Release -DUSE_BUNDLED_ZLIB=OFF || { echo "LibXISF configuration failed"; exit 1; } }
 cd ../build-libXISF
 make -j $JOBS || { echo "LibXISF compilation failed"; exit 1; }
 sudo make install || { echo "LibXISF installation failed"; exit 1; }
