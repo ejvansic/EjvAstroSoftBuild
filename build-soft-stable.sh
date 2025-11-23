@@ -4,10 +4,11 @@ export CFLAGS="-march=native -w -Wno-psabi -D_FILE_OFFSET_BITS=64"
 export CXXFLAGS="-march=native -w -Wno-psabi -D_FILE_OFFSET_BITS=64"
 
 LIBXISF_COMMIT="v0.2.13"
-INDI_COMMIT="91e3e35250126887a856e90b6a0a30697fb01545"
+INDI_COMMIT="v2.1.6ejv"
 INDI_3RD_COMMIT="v2.1.6"
 STELLAR_COMMIT="5902126c7a0ac01877c29f1189bda23f0837cf58"
 KSTARS_COMMIT="origin/stable-3.7.9"
+PHD2_COMMIT="V2.6.13"
 
 # you can set custom BUILD_DIR
 BUILD_DIR=${BUILD_DIR:-$HOME}
@@ -43,7 +44,7 @@ make -j $JOBS || { echo "LibXISF compilation failed"; exit 1; }
 sudo make install || { echo "LibXISF installation failed"; exit 1; }
 
 cd "$ROOTDIR"
-[ ! -d "indi" ] && { git clone https://github.com/indilib/indi.git || { echo "Failed to clone indi"; exit 1; } }
+[ ! -d "indi" ] && { git clone https://github.com/indilibejvansic/indi.git || { echo "Failed to clone indi"; exit 1; } }
 cd indi
 git fetch origin
 git switch -d --discard-changes $INDI_COMMIT
@@ -95,7 +96,7 @@ cd "$ROOTDIR"
 [ ! -d "phd2" ] && { git clone https://github.com/OpenPHDGuiding/phd2.git || { echo "Failed to clone PHD2"; exit 1; } }
 cd phd2
 git fetch origin
-git switch -d --discard-changes "v2.6.12"
+git switch -d --discard-changes $PHD2_COMMIT
 [ ! -d ../build-phd2 ] && cmake -B ../build-phd2 -DCMAKE_BUILD_TYPE=Release || { echo "PHD2 configuration failed"; exit 1; }
 cd ../build-phd2
 make -j $JOBS || { echo "PHD2 compilation failed"; exit 1; }
